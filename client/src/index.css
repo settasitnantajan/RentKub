@@ -4,6 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@layer components {
+  .container {
+    @apply px-8 mx-auto
+  }
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
