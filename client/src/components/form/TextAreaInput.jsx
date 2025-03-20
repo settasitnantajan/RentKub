@@ -10,6 +10,7 @@ const TextAreaInput = ({ register, name, type, placeholder, errors }) => {
       <Textarea
         {...register(name)}
         type={type}
+        rows={5}
         placeholder={placeholder}
         className={`${errors[name] && "border-red-500"}`}
       />
