@@ -1,13 +1,19 @@
 import FormInputs from "@/components/form/FormInputs";
 import TextAreaInput from "@/components/form/TextAreaInput";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CampingSchema } from "@/utils/schemas";
 
 const Camping = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState } = useForm({
+    resolver: zodResolver(CampingSchema),
+  });
 
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  const { errors } = formState;
 
   return (
     <section>
@@ -20,6 +26,7 @@ const Camping = () => {
               name="title"
               type="text"
               placeholder="Input Your Title"
+              errors={errors}
             />
 
             <FormInputs
@@ -27,6 +34,7 @@ const Camping = () => {
               name="price"
               type="number"
               placeholder="Input Your Price"
+              errors={errors}
             />
 
             <TextAreaInput
@@ -34,6 +42,7 @@ const Camping = () => {
               name="description"
               type="text"
               placeholder="Input Your Description"
+              errors={errors}
             />
 
             <button>Submit</button>
