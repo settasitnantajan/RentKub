@@ -6,24 +6,36 @@ import { CampingSchema } from "@/utils/schemas";
 import Buttons from "@/components/form/Buttons";
 import CategoryInput from "@/components/form/CategoryInput";
 import Mainmap from "@/components/map/Mainmap";
+import { createCamping } from "@/api/camping";
+
+// clerk
+import { useAuth } from "@clerk/clerk-react";
 
 const Camping = () => {
+  // clerk
+  const { getToken, userId } = useAuth();
+
   const { register, handleSubmit, formState, setValue } = useForm({
     resolver: zodResolver(CampingSchema),
   });
-
-  const onSubmit = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    console.log(data);
-  };
-
   const { errors, isSubmitting } = formState;
+
+  const hdlSubmit = async (data) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const token = await getToken();
+    console.log(token);
+    createCamping(token, data)
+      .then((req) => {
+        console.log(req.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <section>
       <h1 className="capitalize text-2xl font-semibold mb-4">Create Camping</h1>
       <div className="border p-8 rounded-md">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(hdlSubmit)}>
           <div className="grid md:grid-cols-2 gap-4 mt-4">
             <FormInputs
               register={register}
