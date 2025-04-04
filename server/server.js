@@ -8,17 +8,19 @@ const { readdirSync } = require('fs');
 const campingRoute = require('./routes/camping');
 const profileRoute = require('./routes/profile');
 const handleError = require('./middlewares/error');
+require('dotenv/config')
+const { clerkMiddleware } = require('@clerk/express');
 
 
 
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(clerkMiddleware());
+
 
 readdirSync('./routes').map((r) => app.use('/api', require(`./routes/${r}`)));
 
-// app.use('/api',campingRoute)
-// app.use('/api',profileRoute)
 
 app.use(handleError);
 

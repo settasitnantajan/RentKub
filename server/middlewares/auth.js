@@ -1,15 +1,22 @@
-exports.authCheck  = (req, res, next) => {
+const renderError = require("../utils/renderError")
+const { clerkClient } = require("@clerk/express");
+
+exports.authCheck  = async(req, res, next) => {
     try {
-        console.log('Middleware')
-        if(true) {
-            next()
-        } else {
-            res.status(401).send('Unauthorized')
-            console.log('Unauthorized')
-        }  
+        const  userId  = req.auth.userId
+
+        if (!userId) {
+            return renderError(401, 'Unauthorized')
+        }
+
+        const user =  await clerkClient.users.getUser(userId)
+
+        req.user = user
+
+        next()
         
     } catch (error) {
-        console.log(error)
+        next(error)
     }
     
 }
