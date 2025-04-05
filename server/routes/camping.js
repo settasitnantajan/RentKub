@@ -12,7 +12,7 @@ const {
 const { authCheck } = require("../middlewares/auth");
 
 //list
-router.get("/camping", authCheck, listCamping);
+router.get("/camping", listCamping);
 
 //read param
 router.get("/camping/:id", readCamping);
