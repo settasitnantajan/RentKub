@@ -7,3 +7,7 @@ export const createCamping = async (token, data) => {
     },
   });
 };
+
+export const listCamping = async () => 
+  await axios.get("http://localhost:3000/api/camping")
+    
