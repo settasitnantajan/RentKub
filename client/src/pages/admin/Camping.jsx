@@ -10,6 +10,7 @@ import { createCamping } from "@/api/camping";
 
 // clerk
 import { useAuth } from "@clerk/clerk-react";
+import FormUploadImage from "@/components/form/FormUploadImage";
 
 const Camping = () => {
   // clerk
@@ -61,11 +62,15 @@ const Camping = () => {
               errors={errors}
             />
 
+            <div>
             <CategoryInput
               name="category"
               register={register}
               setValue={setValue}
             />
+            <FormUploadImage/>
+            </div>
+            
           </div>
 
           <Mainmap register={register} setValue={setValue} />

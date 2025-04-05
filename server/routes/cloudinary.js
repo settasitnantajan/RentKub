@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
-// controller
-const { createProfile } = require("../controllers/profile");
-const { authCheck } = require("../middlewares/auth");
 
-// api/Profile
-router.post("/profile", authCheck, createProfile);
+const { authCheck } = require("../middlewares/auth");
+const { createImages } = require("../controllers/cloudinary");
+
+router.post("/images", authCheck, createImages);
 
 module.exports = router;

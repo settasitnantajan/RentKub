@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    listCamping,
-    readCamping,
-    createCamping,
-    updateCamping,
-    deleteCamping,
+  listCamping,
+  readCamping,
+  createCamping,
+  updateCamping,
+  deleteCamping,
 } = require("../controllers/camping");
 
 const { authCheck } = require("../middlewares/auth");
