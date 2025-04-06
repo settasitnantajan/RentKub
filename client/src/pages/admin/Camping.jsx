@@ -11,6 +11,7 @@ import { createCamping } from "@/api/camping";
 // clerk
 import { useAuth } from "@clerk/clerk-react";
 import FormUploadImage from "@/components/form/FormUploadImage";
+import { createAlert } from "@/utils/createAlert";
 
 const Camping = () => {
   // clerk
@@ -29,8 +30,12 @@ const Camping = () => {
       .then((req) => {
         console.log(req.data);
         reset();
+        createAlert("success", "Create Camping Success");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
+    createAlert("error", "Create Camping Failed");
   };
 
   return (
