@@ -16,7 +16,7 @@ const Camping = () => {
   // clerk
   const { getToken, userId } = useAuth();
 
-  const { register, handleSubmit, formState, setValue } = useForm({
+  const { register, handleSubmit, formState, setValue, reset } = useForm({
     resolver: zodResolver(CampingSchema),
   });
   const { errors, isSubmitting } = formState;
@@ -24,10 +24,11 @@ const Camping = () => {
   const hdlSubmit = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const token = await getToken();
-    console.log(token);
+    console.log(data);
     createCamping(token, data)
       .then((req) => {
         console.log(req.data);
+        reset();
       })
       .catch((err) => console.log(err));
   };
@@ -63,14 +64,13 @@ const Camping = () => {
             />
 
             <div>
-            <CategoryInput
-              name="category"
-              register={register}
-              setValue={setValue}
-            />
-            <FormUploadImage/>
+              <CategoryInput
+                name="category"
+                register={register}
+                setValue={setValue}
+              />
+              <FormUploadImage setValue={setValue} />
             </div>
-            
           </div>
 
           <Mainmap register={register} setValue={setValue} />

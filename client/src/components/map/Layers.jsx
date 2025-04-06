@@ -40,6 +40,7 @@ const Layers = () => {
       <LayersControl.Overlay name="Landmark" checked>
         <LayerGroup>
           {landmarks?.map((item) => {
+            console.log(item);
             return (
               <Marker key={item.id} position={[item.lat, item.lng]}>
                 <Popup>
@@ -50,6 +51,10 @@ const Layers = () => {
                   <>
                     <p>{item.title}</p>
                     <p>{item.price}</p>
+                    <p>{item.category}</p>
+                    <p>{item.address}</p>
+                    <p>{item.description}</p>
+                    <img src={item.secure_url} alt={item.title} />
                   </>
                 </Tooltip>
               </Marker>
