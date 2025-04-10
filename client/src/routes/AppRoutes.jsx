@@ -8,6 +8,7 @@ import Home from "@/pages/Home";
 import Notfound from "@/pages/Notfound";
 import Profile from "@/pages/user/Profile";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router";
+import ProtectRoute from "./ProtectRoute";
 
 const AppRoutes = () => {
   return (
@@ -25,7 +26,7 @@ const AppRoutes = () => {
         </Route>
 
         {/* Private Admin */}
-        <Route path="admin" element={<LayoutAdmin />}>
+        <Route path="admin" element={<ProtectRoute eL={<LayoutAdmin />} />}>
           <Route index element={<Dashboard />} />
           <Route path="manage" element={<Manage />} />
           <Route path="camping" element={<Camping />} />

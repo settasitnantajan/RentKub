@@ -9,7 +9,7 @@ import {
 import { AlignLeft } from "lucide-react";
 import { Button } from "../ui/button";
 import UserIcon from "./UserIcon";
-import { Links } from "@/utils/Links";
+import { privateLinks, publicLinks } from "@/utils/Links";
 import { Link } from "react-router";
 import {
   SignedIn,
@@ -34,7 +34,7 @@ const DropdownListMenu = () => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        {Links.map((item, index) => {
+        {publicLinks.map((item, index) => {
           return (
             <DropdownMenuItem key={index}>
               <Link to={item.href}>{item.label}</Link>
@@ -60,17 +60,21 @@ const DropdownListMenu = () => {
 
         {/* Logout Show */}
         <SignedIn>
+          {/* links other */}
+          {privateLinks.map((item, index) => {
+            return (
+              <DropdownMenuItem key={index}>
+                <Link to={item.href}>{item.label}</Link>
+              </DropdownMenuItem>
+            );
+          })}
+          <DropdownMenuSeparator />
           <DropdownMenuItem>
             {/* <UserButton/> */}
             {/* <SignOutButton /> */}
-            <SignOutLink/>
+            <SignOutLink />
           </DropdownMenuItem>
         </SignedIn>
-
-
-
-
-
       </DropdownMenuContent>
     </DropdownMenu>
   );
