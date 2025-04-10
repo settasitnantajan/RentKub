@@ -1,23 +1,8 @@
-import { listCamping } from "@/api/camping";
-import { useEffect, useState } from "react";
 import CampingCard from "../card/CampingCard";
+import useCampingStore from "@/store/camping-store";
 
 const CampingLists = () => {
-  const [campings, setCampings] = useState([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const res = await listCamping();
-      setCampings(res.data.result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(campings);
+  const campings = useCampingStore((state) => state.campings);
 
   return (
     <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">

@@ -1,3 +1,4 @@
+import useCampingStore from "@/store/camping-store";
 import {
   LayersControl,
   TileLayer,
@@ -6,21 +7,9 @@ import {
   LayerGroup,
   Tooltip,
 } from "react-leaflet";
-import { useEffect, useState } from "react";
-import { listCamping } from "@/api/camping";
 
 const Layers = () => {
-  const [landmarks, setLandmarks] = useState([]);
-
-  useEffect(() => {
-    hdlGetLandmark();
-  }, []);
-
-  const hdlGetLandmark = () => {
-    listCamping()
-      .then((res) => setLandmarks(res.data.result))
-      .catch((err) => console.log(err));
-  };
+  const campings = useCampingStore((state) => state.campings);
 
   return (
     <LayersControl>
@@ -39,8 +28,7 @@ const Layers = () => {
 
       <LayersControl.Overlay name="Landmark" checked>
         <LayerGroup>
-          {landmarks?.map((item) => {
-            console.log(item);
+          {campings.map((item) => {
             return (
               <Marker key={item.id} position={[item.lat, item.lng]}>
                 <Popup>
