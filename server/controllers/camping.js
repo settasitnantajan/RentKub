@@ -1,16 +1,15 @@
 const prisma = require("../config/prisma");
 
-exports.listCamping = async (req, res) => {
+exports.listCamping = async (req, res, next) => {
   try {
     const camping = await prisma.landmark.findMany();
     res.json({ result: camping });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send("Internal Server Error");
+    next(error);
   }
 };
 
-exports.readCamping = async (req, res) => {
+exports.readCamping = async (req, res, next) => {
   try {
     const { id } = req.params;
     const camping = await prisma.landmark.findFirst({
@@ -20,12 +19,11 @@ exports.readCamping = async (req, res) => {
     });
     res.json({ result: camping });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send("Internal Server Error");
+    next(error);
   }
 };
 
-exports.createCamping = async (req, res) => {
+exports.createCamping = async (req, res, next) => {
   try {
     console.log(req.body);
     const { title, description, price, category, lat, lng, image } = req.body;
@@ -47,27 +45,24 @@ exports.createCamping = async (req, res) => {
 
     res.json({ message: "Created Camping Successfully", result: camping });
   } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    next(error);
   }
 };
 
-exports.updateCamping = (req, res) => {
+exports.updateCamping = (req, res, next) => {
   try {
     console.log("data updateCamping");
     res.send("data updateCamping");
   } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    next(error);
   }
 };
 
-exports.deleteCamping = (req, res) => {
+exports.deleteCamping = (req, res, next) => {
   try {
     console.log("data deleteCamping");
     res.send("data deleteCamping");
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send("Internal Server Error");
+    next(error);
   }
 };

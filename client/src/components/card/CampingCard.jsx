@@ -1,7 +1,16 @@
+import { motion } from "motion/react"
+import { Link } from "react-router";
+
 const CampingCard = ({ camping }) => {
   console.log(camping);
   return (
-    <article className="hover:scale-105 hover:duration-300 shadow-md p-2 rounded-md">
+    <motion.div
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+    >
+      <Link to={`user/camping/${camping.id}`}>
+      <article className="hover:scale-105 hover:duration-300 shadow-md p-2 rounded-md">
       <div className="h-[300px] rounded-md mb-2 overflow-hidden">
         <img
           src={camping.secure_url}
@@ -23,6 +32,8 @@ const CampingCard = ({ camping }) => {
         </p>
       </div>
     </article>
+    </Link>
+    </motion.div>
   );
 };
 export default CampingCard;
