@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { createBooking } from "@/api/booking";
+import { useNavigate } from "react-router";
 
 const BookingConfirm = () => {
   //zustand
@@ -21,6 +22,8 @@ const BookingConfirm = () => {
   const { isSubmitting } = formState;
 
   //Navigate
+  const navigate = useNavigate();
+
   if (!userId) {
     return (
       <div className="flex justify-center items-center mt-2">
@@ -41,11 +44,13 @@ const BookingConfirm = () => {
   }, [range]);
 
   const hdlBooking = async (value) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     const token = await getToken();
     try {
       const res = await createBooking(token, value);
-      console.log(res);
+      console.log(res.data.result);
+      const bookingId = res.data.result;
+      navigate(`/user/checkout/${bookingId}`);
     } catch (error) {
       console.log(error);
     }
