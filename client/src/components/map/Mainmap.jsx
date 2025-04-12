@@ -48,6 +48,7 @@ const Mainmap = ({ register, Location, setValue }) => {
           Coordinates : {position.lat.toFixed(6)}, {position.lng.toFixed(6)}
         </p>
       )}
+
       <MapContainer
         className="h-[50vh] rounded-md z-0"
         center={Location || DEFAULT_LOCATION}
@@ -58,6 +59,12 @@ const Mainmap = ({ register, Location, setValue }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        {
+          Location && <Marker position={Location}>
+          </Marker>
+        }
+
         <LocationMarker
           position={position}
           setPosition={setPosition}
