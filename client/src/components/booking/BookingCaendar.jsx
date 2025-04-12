@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import useBookingStore from "@/store/booking-store.jsx";
 
 const defaultSelected = {
-  form: undefined,
+  from: undefined,
   to: undefined,
 };
 
